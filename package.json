@@ -1,0 +1,29 @@
+{
+  "name": "cf-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/bot.js",
+    "dev": "nodemon ./src/bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajdeep-G/Cf-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rajdeep-G/Cf-bot/issues"
+  },
+  "dependencies": {
+    "discord.js": "^12.5.0",
+    "axios": "^0.21.0",
+    "nodemon": "^2.0.6",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
