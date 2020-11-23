@@ -51,7 +51,7 @@ getUserInfo = async (userHandle, channel) => {
         .addField("Country ", user_data["country"], true)
         .addField("Organisation- ", user_data["organization"], true)
         .addField("Present Rating ", present_status, true)
-        .addField("Max Rating ", max_status);
+        .addField("Max Rating", max_status);
 
       channel.send(eventEmbed);
     }
