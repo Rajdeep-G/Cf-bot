@@ -75,6 +75,87 @@ getRatingChange = async (userHandle, channel) => {
         .addField("Old Rating", data["oldRating"], true)
         .addField("New Rating", data["newRating"], true);
       channel.send(eventEmbed);
+      const old_rating = parseInt(data["oldRating"], 10);
+      const new_rating = parseInt(data["newRating"], 10);
+      var tier;
+      if (new_rating >= 3000 && old_rating < 3000) {
+        tier = "Legendary Grandmaster";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("FF1A1A")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 2700 && old_rating < 2700) {
+        tier = "International Grandmaster";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("FF1A1A")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 2400 && old_rating < 2400) {
+        tier = "GrandMaster";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("FF1A1A")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 2200 && old_rating < 2200) {
+        tier = "International Master";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("FF981A")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 2000 && old_rating < 2000) {
+        tier = "Master";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("FF981A")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 1900 && old_rating < 1900) {
+        tier = "Candidate master";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("F155FF")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 1600 && old_rating < 1600) {
+        tier = "Expert";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("337DFF")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 1400 && old_rating < 1400) {
+        tier = "Specialist";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("57FCF2")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 1200 && old_rating < 1200) {
+        tier = "Apprentice";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("72FF72")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else if (new_rating >= 1000 && old_rating < 1000) {
+        tier = "Pupil";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("A2E044")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      } else {
+        tier = "NewBie";
+        const eventEmbed2 = new MessageEmbed()
+          .setTitle("CONFRATULTAIONS")
+          .setColor("988F81")
+          .addField("You are now a  ", tier);
+        channel.send(eventEmbed2);
+      }
     } else {
       const eventEmbed = new MessageEmbed()
         .setColor("D8181B")
