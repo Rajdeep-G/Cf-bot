@@ -8,6 +8,7 @@ const PREFIX = "!cf ";
 
 const FUTURE_CONTEST_URL = "https://codeforces.com/api/contest.list?gym=false";
 const USER_INFO_URL = "https://codeforces.com/api/user.info?handles=";
+const RATING_URL = "https://codeforces.com/api/user.rating?handle=";
 const HEADERS = {
   "User-Agent":
     "Mozilla/5.0 (X11; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0",
@@ -34,12 +35,31 @@ getUserInfo = async (userHandle, channel) => {
     const resp = await axios.get(USER_INFO_URL + userHandle, {
       headers: HEADERS,
     });
-    console.log(resp.data["result"][0]);
+    if (resp.data["status"] === "FAILED") {
+      channel.send("User with handle " + userHandle + " not found");
+    } else {
+      console.log(resp.data["result"][0]);
+    }
   } catch (error) {
-    console.error("Error: ", error);
+    channel.send("User with handle " + userHandle + " not found");
   }
 };
+getRatingChange = async (userHandle, channel) => {
+  try {
+    const resp = await axios.get(RATING_URL + userHandle, {
+      headers: HEADERS,
+    });
+    const old_rating =
+      resp.data["result"][resp.data["result"].length - 1]["oldRating"];
+    const new_rating =
+      resp.data["result"][resp.data["result"].length - 1]["newRating"];
 
+    console.log(old_rating);
+    console.log(new_rating);
+  } catch (error) {
+    channel.send("There does not exist any ctf handles with the given name");
+  }
+};
 client.on("ready", () => {
   console.log(` ${client.user.tag} is logged in!`);
   client.user
@@ -73,6 +93,10 @@ client.on("message", (msg) => {
         .addField(
           "!cf user-info <cf-handle>",
           "Displays details for a particular user"
+        )
+        .addField(
+          "!cf lastratingchange <cf-handle>",
+          "Displays the rating change of the last contest"
         );
 
       channel.send(helpEmbed);
@@ -87,6 +111,12 @@ client.on("message", (msg) => {
         channel.send("Too many arguments");
       } else {
         getUserInfo(args[0], channel);
+      }
+    } else if (CMD.toLowerCase() === "lastratingchange") {
+      if (args.length !== 1) {
+        channel.send("Too many arguments");
+      } else {
+        getRatingChange(args[0], channel);
       }
     } else {
       channel.send("Command not yet ready");
