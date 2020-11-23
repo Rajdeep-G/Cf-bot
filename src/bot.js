@@ -38,7 +38,22 @@ getUserInfo = async (userHandle, channel) => {
     if (resp.data["status"] === "FAILED") {
       channel.send("User with handle " + userHandle + " not found");
     } else {
-      console.log(resp.data["result"][0]);
+      const user_data = resp.data["result"][0];
+      const fullname = user_data["firstName"] + " " + user_data["lastName"];
+      const present_status =
+        user_data["rating"] + " (" + user_data["rank"] + ")";
+      const max_status =
+        user_data["maxRating"] + " (" + user_data["maxRank"] + ")";
+      const eventEmbed = new MessageEmbed()
+        .setTitle("User details")
+        .setThumbnail("http:" + user_data["avatar"])
+        .addField("Name ", fullname, true)
+        .addField("Country ", user_data["country"], true)
+        .addField("Organisation- ", user_data["organization"], true)
+        .addField("Present Rating ", present_status, true)
+        .addField("Max Rating ", max_status);
+
+      channel.send(eventEmbed);
     }
   } catch (error) {
     channel.send("User with handle " + userHandle + " not found");
@@ -49,13 +64,27 @@ getRatingChange = async (userHandle, channel) => {
     const resp = await axios.get(RATING_URL + userHandle, {
       headers: HEADERS,
     });
-    const old_rating =
-      resp.data["result"][resp.data["result"].length - 1]["oldRating"];
-    const new_rating =
-      resp.data["result"][resp.data["result"].length - 1]["newRating"];
-
-    console.log(old_rating);
-    console.log(new_rating);
+    const data = resp.data["result"][resp.data["result"].length - 1];
+    const last_contest = data["contestId"] + " - " + data["contestName"];
+    if (data["newRating"] - data["oldRating"] >= 0) {
+      const eventEmbed = new MessageEmbed()
+        .setColor("8AFF33")
+        .setAuthor("LAST CONTEST DETAILS")
+        .addField("Contest", last_contest)
+        .addField("Rank", data["rank"], true)
+        .addField("Old Rating", data["oldRating"], true)
+        .addField("New Rating", data["newRating"], true);
+      channel.send(eventEmbed);
+    } else {
+      const eventEmbed = new MessageEmbed()
+        .setColor("D8181B")
+        .setAuthor("LAST CONTEST DETAILS")
+        .addField("Contest", last_contest)
+        .addField("Rank", data["rank"], true)
+        .addField("Old Rating", data["oldRating"], true)
+        .addField("New Rating", data["newRating"], true);
+      channel.send(eventEmbed);
+    }
   } catch (error) {
     channel.send("There does not exist any ctf handles with the given name");
   }
@@ -91,11 +120,11 @@ client.on("message", (msg) => {
         .setDescription("Its a bot to get in touch with CF.")
         .addField("!cf future", "Displays upcoming CF contests")
         .addField(
-          "!cf user-info <cf-handle>",
+          "!cf userinfo <cf-handle>",
           "Displays details for a particular user"
         )
         .addField(
-          "!cf lastratingchange <cf-handle>",
+          "!cf lastcontest <cf-handle>",
           "Displays the rating change of the last contest"
         );
 
@@ -112,14 +141,14 @@ client.on("message", (msg) => {
       } else {
         getUserInfo(args[0], channel);
       }
-    } else if (CMD.toLowerCase() === "lastratingchange") {
+    } else if (CMD.toLowerCase() === "lastcontest") {
       if (args.length !== 1) {
         channel.send("Too many arguments");
       } else {
         getRatingChange(args[0], channel);
       }
     } else {
-      channel.send("Command not yet ready");
+      channel.send("INVALID COMMAND (╯°□°）╯︵ ┻━┻");
     }
   }
 });
