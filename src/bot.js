@@ -221,7 +221,7 @@ getUserInfo = async (userHandle, channel) => {
       }
     }
   } catch (error) {
-    channel.send("User with handle " + userHandle + " not found - local2");
+    channel.send("User with handle " + userHandle + " not found ");
   }
 };
 getRatingChange = async (userHandle, channel) => {
