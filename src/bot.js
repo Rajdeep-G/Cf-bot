@@ -382,7 +382,12 @@ client.on("message", (msg) => {
       channel.send(helpEmbed);
     } else if (CMD.toLowerCase() === "future") {
       if (args.length !== 1) {
-        channel.send("Invalid number of arguments");
+        if (args.length != 0) {
+          channel.send("Invalid number of arguments!")
+        }
+        else {
+          getFutureContests(channel, 1);
+        }
       } else {
         const no_of_contest = parseInt(args[0], 10);
         if (no_of_contest <= 0) {
