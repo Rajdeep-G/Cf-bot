@@ -336,6 +336,7 @@ getRatingChange = async (userHandle, channel) => {
     channel.send("There does not exist any ctf handles with the given name");
   }
 };
+
 client.on("ready", () => {
   console.log(` ${client.user.tag} is logged in!`);
   client.user
@@ -351,7 +352,6 @@ client.on("ready", () => {
 });
 
 client.on("message", (msg) => {
-  const channel = msg.channel;
   if (msg.content.startsWith(PREFIX)) {
     const [CMD, ...args] = msg.content
       .trim()
@@ -383,9 +383,8 @@ client.on("message", (msg) => {
     } else if (CMD.toLowerCase() === "future") {
       if (args.length !== 1) {
         if (args.length != 0) {
-          channel.send("Invalid number of arguments!")
-        }
-        else {
+          channel.send("Invalid number of arguments!");
+        } else {
           getFutureContests(channel, 1);
         }
       } else {
@@ -412,7 +411,7 @@ client.on("message", (msg) => {
       } else {
         getRatingChange(args[0], channel);
       }
-    } else {
+    }  else {
       channel.send("INVALID COMMAND (╯°□°）╯︵ ┻━┻");
     }
   }
