@@ -94,7 +94,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -106,7 +106,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -118,7 +118,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -130,7 +130,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -142,7 +142,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -154,7 +154,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -166,7 +166,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -178,7 +178,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -190,7 +190,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -202,7 +202,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -214,7 +214,7 @@ getUserInfo = async (userHandle, channel) => {
           .setThumbnail("http:" + user_data["avatar"])
           .addField("Name ", fullname, true)
           .addField("Country ", user_data["country"], true)
-          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Organisation ", user_data["organization"], true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -362,7 +362,7 @@ client.on("message", (msg) => {
       const helpEmbed = new MessageEmbed()
         .setURL("https://codeforces.com")
         .setTitle("Usage: !cf <command> [...args]")
-        .setImage(
+        .setThumbnail(
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFhsi1ZImNJDXQdTK9j6TEDA2n8Y0egkaDDA&usqp=CAU"
         )
         .setDescription("Its a bot to get in touch with CF.")
@@ -384,7 +384,16 @@ client.on("message", (msg) => {
       if (args.length !== 1) {
         channel.send("Invalid number of arguments");
       } else {
-        getFutureContests(channel, args[0]);
+        const no_of_contest = parseInt(args[0], 10);
+        if (no_of_contest <= 0) {
+          channel.send("Please enter a positive number.");
+        } else {
+          if (Number.isInteger(no_of_contest)) {
+            getFutureContests(channel, no_of_contest);
+          } else {
+            channel.send("Please enter a positive number.");
+          }
+        }
       }
     } else if (CMD.toLowerCase() === "userinfo") {
       if (args.length !== 1) {
