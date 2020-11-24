@@ -206,19 +206,7 @@ getUserInfo = async (userHandle, channel) => {
           .addField("Max Rating", max_status);
 
         channel.send(eventEmbed);
-      } else if (current_rating > 1000) {
-        const eventEmbed = new MessageEmbed()
-          .setTitle("User details")
-          .setColor("A2E044")
-          .setThumbnail("http:" + avatar)
-          .addField("Name ", fullname, true)
-          .addField("Country ", country, true)
-          .addField("Organisation ", orgg, true)
-          .addField("Present Rating ", present_status, true)
-          .addField("Max Rating", max_status);
-
-        channel.send(eventEmbed);
-      } else if (current_rating <= 1000) {
+      } else if (current_rating <= 1200) {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("988F81")
@@ -312,24 +300,10 @@ getRatingChange = async (userHandle, channel) => {
           .addField("You are now a  ", tier);
         channel.send(eventEmbed2);
       } else if (new_rating >= 1200 && old_rating < 1200) {
-        tier = "Apprentice";
-        const eventEmbed2 = new MessageEmbed()
-          .setTitle("CONFRATULTAIONS")
-          .setColor("72FF72")
-          .addField("You are now a  ", tier);
-        channel.send(eventEmbed2);
-      } else if (new_rating >= 1000 && old_rating < 1000) {
         tier = "Pupil";
         const eventEmbed2 = new MessageEmbed()
           .setTitle("CONFRATULTAIONS")
           .setColor("A2E044")
-          .addField("You are now a  ", tier);
-        channel.send(eventEmbed2);
-      } else {
-        tier = "NewBie";
-        const eventEmbed2 = new MessageEmbed()
-          .setTitle("CONFRATULTAIONS")
-          .setColor("988F81")
           .addField("You are now a  ", tier);
         channel.send(eventEmbed2);
       }
