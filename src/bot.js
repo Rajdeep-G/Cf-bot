@@ -13,17 +13,16 @@ const HEADERS = {
   "User-Agent":
     "Mozilla/5.0 (X11; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0",
 };
-getFutureContests = async (channel) => {
+getFutureContests = async (channel, limit) => {
   try {
     const resp = await axios.get(FUTURE_CONTEST_URL, { headers: HEADERS });
     var i;
     var count_contest = 0;
     const contest_data = [];
+
     for (i = 15; i >= 0; i--) {
       if (resp.data["result"][i]["phase"] === "BEFORE") {
         count_contest += 1;
-        // contest_data.push(resp.data["result"][i]);
-        // console.log(contest_data);
         contest_data.push(resp.data["result"][i]["id"]);
         contest_data.push(resp.data["result"][i]["name"]);
         contest_data.push(resp.data["result"][i]["durationSeconds"]);
@@ -31,7 +30,15 @@ getFutureContests = async (channel) => {
       }
     }
     var c;
+    if (count_contest < limit) {
+      channel.send(
+        "There are maximum " + count_contest + " contests in upcoming future"
+      );
+    }
     for (c = 0; c < count_contest; c++) {
+      if (c >= limit) {
+        break;
+      }
       const contest_duration = contest_data[4 * c + 2] / 3600 + " Hrs";
       const contest_url =
         "https://codeforces.com/contests/" + contest_data[4 * c];
@@ -79,16 +86,140 @@ getUserInfo = async (userHandle, channel) => {
         user_data["rating"] + " (" + user_data["rank"] + ")";
       const max_status =
         user_data["maxRating"] + " (" + user_data["maxRank"] + ")";
-      const eventEmbed = new MessageEmbed()
-        .setTitle("User details")
-        .setThumbnail("http:" + user_data["avatar"])
-        .addField("Name ", fullname, true)
-        .addField("Country ", user_data["country"], true)
-        .addField("Organisation- ", user_data["organization"], true)
-        .addField("Present Rating ", present_status, true)
-        .addField("Max Rating", max_status);
+      const current_rating = user_data["rating"];
+      if (current_rating > 3000) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("FF1A1A")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
 
-      channel.send(eventEmbed);
+        channel.send(eventEmbed);
+      } else if (current_rating > 2700) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("FF1A1A")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 2400) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("FF1A1A")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 2200) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("FF981A")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 2000) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("FF981A")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 1900) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("F155FF")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 1600) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("337DFF")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 1400) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("57FCF2")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 1200) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("72FF72")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 1000) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("A2E044")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      } else if (current_rating > 1000) {
+        const eventEmbed = new MessageEmbed()
+          .setTitle("User details")
+          .setColor("988F81")
+          .setThumbnail("http:" + user_data["avatar"])
+          .addField("Name ", fullname, true)
+          .addField("Country ", user_data["country"], true)
+          .addField("Organisation- ", user_data["organization"], true)
+          .addField("Present Rating ", present_status, true)
+          .addField("Max Rating", max_status);
+
+        channel.send(eventEmbed);
+      }
     }
   } catch (error) {
     channel.send("User with handle " + userHandle + " not found");
@@ -220,6 +351,7 @@ client.on("ready", () => {
 });
 
 client.on("message", (msg) => {
+  const channel = msg.channel;
   if (msg.content.startsWith(PREFIX)) {
     const [CMD, ...args] = msg.content
       .trim()
@@ -234,7 +366,10 @@ client.on("message", (msg) => {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFhsi1ZImNJDXQdTK9j6TEDA2n8Y0egkaDDA&usqp=CAU"
         )
         .setDescription("Its a bot to get in touch with CF.")
-        .addField("!cf future", "Displays upcoming CF contests")
+        .addField(
+          "!cf future <no of upcoming contests>",
+          "Displays upcoming CF contests"
+        )
         .addField(
           "!cf userinfo <cf-handle>",
           "Displays details for a particular user"
@@ -246,20 +381,20 @@ client.on("message", (msg) => {
 
       channel.send(helpEmbed);
     } else if (CMD.toLowerCase() === "future") {
-      if (args.length !== 0) {
-        channel.send("Too many arguments.");
+      if (args.length !== 1) {
+        channel.send("Invalid number of arguments");
       } else {
-        getFutureContests(channel);
+        getFutureContests(channel, args[0]);
       }
     } else if (CMD.toLowerCase() === "userinfo") {
       if (args.length !== 1) {
-        channel.send("Too many arguments");
+        channel.send("Invalid number of arguments");
       } else {
         getUserInfo(args[0], channel);
       }
     } else if (CMD.toLowerCase() === "lastcontest") {
       if (args.length !== 1) {
-        channel.send("Too many arguments");
+        channel.send("Invalid number of arguments");
       } else {
         getRatingChange(args[0], channel);
       }
