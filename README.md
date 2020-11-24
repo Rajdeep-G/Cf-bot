@@ -4,6 +4,30 @@
 
 Gets the happening around in CF using the codeforces api
 
+
+### !cf help
+
+![image](./Images/1.PNG)
+
+### !cf future 2 
+
+![image](./Images/2.PNG)
+
+
+### !cf userinfo Rajdeep2k
+
+![image](./Images/3.PNG)
+
+
+### !cf userinfo kriish
+
+![image](./Images/4.PNG)
+
+
+### !cf lastcontest arnab1729
+
+![image](./Images/5.PNG)
+
 ## Development:
 
 ```bash
