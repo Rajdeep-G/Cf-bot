@@ -81,20 +81,31 @@ getUserInfo = async (userHandle, channel) => {
       channel.send("User with handle " + userHandle + " not found");
     } else {
       const user_data = resp.data["result"][0];
-      const fullname = user_data["firstName"] + " " + user_data["lastName"];
+      var fullname = user_data["firstName"] + " " + user_data["lastName"];
+
       const present_status =
         user_data["rating"] + " (" + user_data["rank"] + ")";
       const max_status =
         user_data["maxRating"] + " (" + user_data["maxRank"] + ")";
       const current_rating = user_data["rating"];
+      const avatar = user_data["avatar"];
+      var orgg = user_data["organization"];
+      var country = user_data["country"];
+
+      if (orgg === "") {
+        orgg = "N-A";
+      }
+      if (country === "") {
+        country = "N-A";
+      }
       if (current_rating > 3000) {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("FF1A1A")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -103,10 +114,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("FF1A1A")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -115,10 +126,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("FF1A1A")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -127,10 +138,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("FF981A")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -139,10 +150,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("FF981A")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -151,10 +162,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("F155FF")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -163,10 +174,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("337DFF")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -175,10 +186,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("57FCF2")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -187,10 +198,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("72FF72")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -199,10 +210,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("A2E044")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -211,10 +222,10 @@ getUserInfo = async (userHandle, channel) => {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("988F81")
-          .setThumbnail("http:" + user_data["avatar"])
+          .setThumbnail("http:" + avatar)
           .addField("Name ", fullname, true)
-          .addField("Country ", user_data["country"], true)
-          .addField("Organisation ", user_data["organization"], true)
+          .addField("Country ", country, true)
+          .addField("Organisation ", orgg, true)
           .addField("Present Rating ", present_status, true)
           .addField("Max Rating", max_status);
 
@@ -222,7 +233,7 @@ getUserInfo = async (userHandle, channel) => {
       }
     }
   } catch (error) {
-    channel.send("User with handle " + userHandle + " not found");
+    channel.send("User with handle " + userHandle + " not found - local2");
   }
 };
 getRatingChange = async (userHandle, channel) => {
@@ -411,7 +422,7 @@ client.on("message", (msg) => {
       } else {
         getRatingChange(args[0], channel);
       }
-    }  else {
+    } else {
       channel.send("INVALID COMMAND (╯°□°）╯︵ ┻━┻");
     }
   }
