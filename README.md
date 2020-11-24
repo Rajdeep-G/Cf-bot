@@ -1,4 +1,4 @@
-![Cf-bot](https://socialify.git.ci/Rajdeep-G/Cf-bot/image?language=1&owner=1&stargazers=1&theme=Light)
+![Cf-bot](https://socialify.git.ci/Rajdeep-G/Cf-bot/image?description=1&font=Raleway&language=1&owner=1&pattern=Brick%20Wall&pulls=1&stargazers=1&theme=Dark)
 
 # CF Bot
 
