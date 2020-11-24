@@ -207,7 +207,7 @@ getUserInfo = async (userHandle, channel) => {
           .addField("Max Rating", max_status);
 
         channel.send(eventEmbed);
-      } else if (current_rating > 1000) {
+      } else if (current_rating <= 1000) {
         const eventEmbed = new MessageEmbed()
           .setTitle("User details")
           .setColor("988F81")
