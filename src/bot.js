@@ -17,13 +17,48 @@ getFutureContests = async (channel) => {
   try {
     const resp = await axios.get(FUTURE_CONTEST_URL, { headers: HEADERS });
     var i;
+    var count_contest = 0;
     const contest_data = [];
     for (i = 15; i >= 0; i--) {
       if (resp.data["result"][i]["phase"] === "BEFORE") {
-        console.log(resp.data["result"][i]["name"]);
-        contest_data.push(resp.data["result"][i]);
-        console.log(contest_data);
+        count_contest += 1;
+        // contest_data.push(resp.data["result"][i]);
+        // console.log(contest_data);
+        contest_data.push(resp.data["result"][i]["id"]);
+        contest_data.push(resp.data["result"][i]["name"]);
+        contest_data.push(resp.data["result"][i]["durationSeconds"]);
+        contest_data.push(resp.data["result"][i]["startTimeSeconds"]);
       }
+    }
+    var c;
+    for (c = 0; c < count_contest; c++) {
+      const contest_duration = contest_data[4 * c + 2] / 3600 + " Hrs";
+      const contest_url =
+        "https://codeforces.com/contests/" + contest_data[4 * c];
+      const date = new Date(contest_data[4 * c + 3] * 1000).toLocaleDateString(
+        "en-IN",
+        {
+          timeZone: "Asia/Kolkata",
+        }
+      );
+      const time = new Date(contest_data[4 * c + 3] * 1000).toLocaleTimeString(
+        "en-IN",
+        {
+          timeZone: "Asia/Kolkata",
+        }
+      );
+      const m_time =
+        time.substring(0, time.lastIndexOf(":")) +
+        time.substring(time.lastIndexOf(":") + 3);
+      const display_date_and_time = date + " at " + m_time;
+      const helpEmbed = new MessageEmbed()
+        .setURL(contest_url)
+        .setTitle(contest_data[4 * c + 1])
+        .addField("Contest-Id", contest_data[4 * c], true)
+        .addField("Duration", contest_duration, true)
+        .addField("Starting at (IST)", display_date_and_time, true);
+
+      channel.send(helpEmbed);
     }
   } catch (error) {
     console.error("Error: ", error);
