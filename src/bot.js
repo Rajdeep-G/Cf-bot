@@ -401,7 +401,7 @@ client.on("message", (msg) => {
       }
     } else if (CMD.toLowerCase() === "userinfo") {
       if (args.length !== 1) {
-        channel.send("Invalid number of argument");
+        channel.send("Invalid number of arguments.");
       } else {
         getUserInfo(args[0], channel);
       }
